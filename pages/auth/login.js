@@ -25,42 +25,28 @@ function Login() {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
-              <small>Sign in with</small>
+              <small>Tunnistaudu käyttäen</small>
             </div>
             <div className="btn-wrapper text-center">
               <Button
                 className="btn-neutral btn-icon"
                 color="default"
-                href="#pablo"
+                href="/auth/opinsys"
                 onClick={(e) => e.preventDefault()}
               >
                 <span className="btn-inner--icon">
                   <img
                     alt="..."
-                    src={require("assets/img/icons/common/github.svg")}
+                    src={require("assets/img/icons/common/opinsys.png")}
                   />
                 </span>
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={require("assets/img/icons/common/google.svg")}
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
+                <span className="btn-inner--text">opinsys</span>
               </Button>
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+              <small>Tai kirjaudu käyttäen salasanaa</small>
             </div>
             <Form role="form">
               <FormGroup className="mb-3">
@@ -71,9 +57,9 @@ function Login() {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
+                    placeholder="Käyttäjätunnus"
+                    type="text"
+                    autoComplete="new-username"
                   />
                 </InputGroup>
               </FormGroup>
@@ -85,28 +71,15 @@ function Login() {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Password"
+                    placeholder="Salasana"
                     type="password"
                     autoComplete="new-password"
                   />
                 </InputGroup>
               </FormGroup>
-              <div className="custom-control custom-control-alternative custom-checkbox">
-                <input
-                  className="custom-control-input"
-                  id=" customCheckLogin"
-                  type="checkbox"
-                />
-                <label
-                  className="custom-control-label"
-                  htmlFor=" customCheckLogin"
-                >
-                  <span className="text-muted">Remember me</span>
-                </label>
-              </div>
               <div className="text-center">
                 <Button className="my-4" color="primary" type="button">
-                  Sign in
+                  Kirjaudu sisään
                 </Button>
               </div>
             </Form>
@@ -116,19 +89,10 @@ function Login() {
           <Col xs="6">
             <a
               className="text-light"
-              href="#pablo"
+              href="/auth/resetPassword"
               onClick={(e) => e.preventDefault()}
             >
-              <small>Forgot password?</small>
-            </a>
-          </Col>
-          <Col className="text-right" xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Create new account</small>
+              <small>Unohditko salasanasi?</small>
             </a>
           </Col>
         </Row>
