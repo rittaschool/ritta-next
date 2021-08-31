@@ -1,16 +1,16 @@
 {
   "name": "nextjs-argon-dashboard",
   "version": "1.1.0",
-  "author": "Creative Tim",
+  "author": "ritta.fi",
   "license": "MIT",
-  "homepage": "https://demos.creative-tim.com/nextjs-argon-dashboard/",
-  "description": "NextJS version of Argon Dashboard React by Creative Tim",
+  "homepage": "https://demo.ritta.fi",
+  "description": "Ritta's next prototype interface",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/nextjs-argon-dashboard/issues"
+    "url": "https://github.com/rittaschool/ritta-next/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/nextjs-argon-dashboard.git"
+    "url": "git+https://github.com/rittaschool/ritta-next.git"
   },
   "scripts": {
     "start": "next start",
@@ -43,7 +43,7 @@
     "react-copy-to-clipboard": "5.0.3",
     "react-datetime": "3.0.4",
     "react-dom": "17.0.1",
-    "reactstrap": "8.9.0",
+    "reactstrap": "^8.9.0",
     "webpack": "4.44.1"
   }
 }

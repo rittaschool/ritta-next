@@ -46,17 +46,9 @@ export default class MyApp extends App {
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 `);
-    document.insertBefore(comment, document.documentElement);
+    document.appendChild(comment);
   }
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
   render() {
     const { Component, pageProps } = this.props;
 
