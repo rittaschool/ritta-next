@@ -1,9 +1,6 @@
 MIT License
 
-Copyright (c) 2021 ritta.fi
-
-Parts of software are owned by the following third parties:
-- Creative Tim (MIT, consult TEMPLATE_LICENSE.md)
+Copyright (c) 2021 Creative Tim
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
