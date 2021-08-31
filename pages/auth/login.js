@@ -33,6 +33,7 @@ export async function getStaticProps() {
       "Content-Type": "application/json",
     },
   })
+  console.log(Announcements.status)
   const announcements = await Announcements.json();
 
   const Info = await fetch(`${rittaConfig.baseUrl}/v1/info`);
