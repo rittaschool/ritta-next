@@ -35,9 +35,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
-var ps;
-
 function Sidebar(props) {
   // used for checking current route
   const router = useRouter();
@@ -65,7 +62,7 @@ function Sidebar(props) {
               active={activeRoute(prop.layout + prop.path)}
               onClick={closeCollapse}
             >
-              <i className={prop.icon} />
+              <i className={prop.icon + `${activeRoute(prop.layout + prop.path) ? ' text-primary' : ''}`} />
               {prop.name}
             </NavLink>
           </Link>
@@ -108,21 +105,6 @@ function Sidebar(props) {
         {/* User */}
         <Nav className="align-items-center d-md-none">
           <UncontrolledDropdown nav>
-            <DropdownToggle nav className="nav-link-icon">
-              <i className="ni ni-bell-55" />
-            </DropdownToggle>
-            <DropdownMenu
-              aria-labelledby="navbar-default_dropdown_1"
-              className="dropdown-menu-arrow"
-              right
-            >
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Something else here</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-          <UncontrolledDropdown nav>
             <DropdownToggle nav>
               <Media className="align-items-center">
                 <span className="avatar avatar-sm rounded-circle">
@@ -135,36 +117,30 @@ function Sidebar(props) {
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem className="noti-title" header tag="div">
-                <h6 className="text-overflow m-0">Welcome!</h6>
+                <h6 className="text-overflow m-0">Vaihda käyttäjää</h6>
               </DropdownItem>
               <Link href="/admin/profile">
-                <DropdownItem>
-                  <i className="ni ni-single-02" />
-                  <span>My profile</span>
-                </DropdownItem>
-              </Link>
-              <Link href="/admin/profile">
-                <DropdownItem>
-                  <i className="ni ni-settings-gear-65" />
-                  <span>Settings</span>
-                </DropdownItem>
-              </Link>
-              <Link href="/admin/profile">
-                <DropdownItem>
-                  <i className="ni ni-calendar-grid-58" />
-                  <span>Activity</span>
-                </DropdownItem>
-              </Link>
-              <Link href="/admin/profile">
-                <DropdownItem>
-                  <i className="ni ni-support-16" />
-                  <span>Support</span>
-                </DropdownItem>
-              </Link>
+                  <DropdownItem>
+                    <i className="ni ni-single-02" />
+                    <span>Jaakko Virtanen <small> (Opettaja)</small></span>
+                  </DropdownItem>
+                </Link>
+                <Link href="/admin/profile">
+                  <DropdownItem>
+                    <i className="ni ni-single-02" />
+                    <span>Wilma Virtanen <small> (Huoltaja)</small></span>
+                  </DropdownItem>
+                </Link>
+                <Link href="/admin/profile">
+                  <DropdownItem>
+                    <i className="ni ni-single-02" />
+                    <span>Helmi Virtanen <small> (Huoltaja)</small></span>
+                  </DropdownItem>
+                </Link>
               <DropdownItem divider />
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem href="/auth/logout" onClick={(e) => { e.preventDefault(); localStorage.clear(); window.location.reload(); }}>
                 <i className="ni ni-user-run" />
-                <span>Logout</span>
+                <span>Kirjaudu ulos</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
@@ -220,33 +196,19 @@ function Sidebar(props) {
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
-          <h6 className="navbar-heading text-muted">Documentation</h6>
+          <h6 className="navbar-heading text-muted">Linkkejä</h6>
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink href="https://www.creative-tim.com/learning-lab/nextjs/overview/argon-dashboard?ref=njsad-admin-sidebar">
-                <i className="ni ni-spaceship" />
-                Getting started
+              <NavLink href="https://wiki.ritta.fi">
+                <i className="ni ni-paper-diploma" />
+                Wiki
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://www.creative-tim.com/learning-lab/nextjs/colors/argon-dashboard?ref=njsad-admin-sidebar">
-                <i className="ni ni-palette" />
-                Foundation
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://www.creative-tim.com/learning-lab/nextjs/avatar/argon-dashboard?ref=njsad-admin-sidebar">
-                <i className="ni ni-ui-04" />
-                Components
-              </NavLink>
-            </NavItem>
-          </Nav>
-          <Nav className="mb-md-3" navbar>
-            <NavItem className="active-pro active">
-              <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=njsad-admin-sidebar">
-                <i className="ni ni-spaceship" />
-                Upgrade to PRO
+              <NavLink href="https://github.com/rittaschool">
+                <i className="ni ni-folder-17" />
+                Github
               </NavLink>
             </NavItem>
           </Nav>

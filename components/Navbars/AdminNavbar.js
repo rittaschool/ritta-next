@@ -68,7 +68,7 @@ function AdminNavbar({ brandText }) {
                   </DropdownItem>
                 </Link>
                 <DropdownItem divider />
-                <DropdownItem href="/auth/logout" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="/auth/logout" onClick={(e) => { e.preventDefault(); localStorage.clear(); window.location.reload(); }}>
                   <i className="ni ni-user-run" />
                   <span>Kirjaudu ulos</span>
                 </DropdownItem>
