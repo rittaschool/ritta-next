@@ -51,6 +51,26 @@ async function mfaVerify(mfaToken, mfaCode) {
     );
     return { error: false, data: res.data };
   } catch (e) {
+    console.log(e)
+    return { error: true, message: e.response.data.message };
+  }
+}
+
+async function setPassword(passwordToken, newPassword) {
+  try {
+    const res = await axios.post(
+      `${rittaConfig.baseUrl}/v1/user/password/change`,
+      {
+        new_password: newPassword,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + passwordToken,
+        },
+      }
+    );
+    return { error: false, data: res.data };
+  } catch (e) {
     return { error: true, message: e.response.data.message };
   }
 }
@@ -191,6 +211,7 @@ function MfaForm({ setStatus, mfaToken, setPasswordToken }) {
             }
             setError(msg);
           } else {
+            console.log(res.data)
             if (res.data.passwordChangeToken) {
               setPasswordToken(res.data.passwordChangeToken);
               setStatus(2);
@@ -219,6 +240,98 @@ function MfaForm({ setStatus, mfaToken, setPasswordToken }) {
         <div className="text-center">
           <Button className="my-4" color="primary" type="submit">
             Kirjaudu sisään
+          </Button>
+        </div>
+      </Form>
+    </>
+  );
+}
+
+function PasswordForm({ setStatus, passwordToken }) {
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [validatePassword, setValidatePassword] = useState("");
+
+  return (
+    <>
+      {error && (
+        <Alert color="danger">
+          <span>
+            <b>{error}</b>
+          </span>
+        </Alert>
+      )}
+      {message && (
+        <Alert color="primary">
+          <span>
+            <b>{message}</b>
+          </span>
+        </Alert>
+      )}
+      <div className="text-center text-muted mb-4">
+        <small>Aseta salasana</small>
+      </div>
+      <Form
+        role="form"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (message) return;
+          if (newPassword === "") {
+            return setError("Uusi salasana on tyhjä")
+          }
+          if (newPassword !== validatePassword) {
+            return setError("Uusi salasana ja salasanan varmistus eivät täsmää")
+          }
+          setError("");
+          const res = await setPassword(passwordToken, newPassword);
+          if (res.error) {
+            let msg = res.message;
+            switch (res.message) {
+              default:
+                break;
+            }
+            setError(msg);
+          } else {
+            setError("");
+            setMessage("Salasanan vaihto onnistui. Kirjaudu sisään uudelleen.")
+            setTimeout(() => window.location.reload(), 2000)
+          }
+        }}
+      >
+        <FormGroup className="mb-3">
+          <InputGroup className="input-group-alternative">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-lock-circle-open" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Uusi salasana"
+              type="password"
+              autoComplete="off"
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </InputGroup>
+        </FormGroup>
+        <FormGroup className="mb-3">
+          <InputGroup className="input-group-alternative">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-lock-circle-open" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <Input
+              placeholder="Salasana uudelleen"
+              type="password"
+              autoComplete="off"
+              onChange={(e) => setValidatePassword(e.target.value)}
+            />
+          </InputGroup>
+        </FormGroup>
+        <div className="text-center">
+          <Button className="my-4" color="primary" type="submit">
+            Vaihda salasana
           </Button>
         </div>
       </Form>
@@ -375,15 +488,14 @@ function Login({ info, announcements }) {
                 setPasswordToken={setPasswordToken}
               />
             ) : status === 2 ? (
-              <LoginForm
+              <PasswordForm
                 setStatus={setStatus}
-                setMfaToken={setMfaToken}
-                setPasswordToken={setPasswordToken}
+                passwordToken={passwordToken}
               />
             ) : <YubiForm
                 setStatus={setStatus}
                 setPasswordToken={setPasswordToken}
-                />
+              />
             }
           </CardBody>
           {school.opinsysEnabled && (
