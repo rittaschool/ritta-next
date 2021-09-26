@@ -1,6 +1,8 @@
 import LoginLayout from '../../components/Layout/LoginLayout';
 import React from 'react';
 
+import Link from 'next/link';
+
 // Icons
 import { ImKey2 } from 'react-icons/im';
 
@@ -22,7 +24,9 @@ export default class Index extends React.Component {
             <div className="d-grid">
               <button className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Kirjaudu sisään</button>
                 <div className="text-center">
-                  <a className="small" href="/auth/forgot">Unohditko salasanasi?</a>
+                  <Link href="/auth/forgot">
+                    <a className="small">Unohditko salasanasi?</a>
+                  </Link>
                 </div>
             </div>
           </form>
