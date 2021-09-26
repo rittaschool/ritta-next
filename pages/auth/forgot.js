@@ -13,7 +13,7 @@ export default class Index extends React.Component {
           <form>
             <p>Mikäli tiliisi ei ole liitetty sähköpostiosoitetta, ota yhteys oppilaitokseen.</p>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control bg-light" id="floatingInput" placeholder="etunimi.sukunimi" />
+              <input type="text" className="form-control bg-light" id="floatingInput" />
               <label htmlFor="floatingInput">Sähköpostiosoite</label>
             </div>
             <div className="d-grid">
