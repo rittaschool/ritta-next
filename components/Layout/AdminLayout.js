@@ -4,7 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Logo from '../../assets/logo_color.png';
-import User from '../../assets/user.jpg';
+import { Dropdown } from 'react-bootstrap';
+
+import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 
 /**
  * Main admin layout - A Higher Order Component
@@ -18,16 +20,16 @@ class AdminLayoutHoc extends React.Component {
               <div className="container-fluid">
                 <a className="navbar-brand p-0"><Image src={Logo} alt="Ritta Logo" height="64" width="160"/></a>
                 <div className="dropdown text-end d-flex">
-                  <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <Image src={User} alt="mdo" className="rounded-circle" width="32" height="32" />
-                  </a>
-                  <ul className="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                    <li><a className="dropdown-item" href="#">New project...</a></li>
-                    <li><a className="dropdown-item" href="#">Settings</a></li>
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href="#">Sign out</a></li>
-                  </ul>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="link" id="dropdown-basic" className="text-decoration-none text-black">
+                      Etunimi Sukunimi
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="/settings"><IoSettingsOutline /> Asetukset</Dropdown.Item>
+                      <Dropdown.Item href="/auth/logout"><IoLogOutOutline /> Kirjaudu ulos</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
               </div>
             </nav>

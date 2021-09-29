@@ -1,6 +1,8 @@
 import LoginLayout from '../../components/Layout/LoginLayout';
 import React from 'react';
 
+import Link from 'next/link';
+
 // Icons
 import { ImLock } from 'react-icons/im';
 
@@ -13,13 +15,15 @@ export default class Index extends React.Component {
           <form>
             <p>Mikäli tiliisi ei ole liitetty sähköpostiosoitetta, ota yhteys oppilaitokseen.</p>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control bg-light" id="floatingInput" placeholder="etunimi.sukunimi" />
+              <input type="text" className="form-control bg-light" id="floatingInput" />
               <label htmlFor="floatingInput">Sähköpostiosoite</label>
             </div>
             <div className="d-grid">
               <button className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Lähetä</button>
                 <div className="text-center">
-                  <a className="small" href="/auth">Takaisin</a>
+                  <Link href="/auth#login"> 
+                    <a className="small">Takaisin</a>
+                  </Link>
                 </div>
             </div>
           </form>
