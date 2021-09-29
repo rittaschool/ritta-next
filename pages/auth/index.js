@@ -24,7 +24,7 @@ export default class Index extends React.Component {
             <div className="d-grid">
               <button className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Kirjaudu sisään</button>
                 <div className="text-center">
-                  <Link href="/auth/forgot">
+                  <Link href="/auth/forgot#login">
                     <a className="small">Unohditko salasanasi?</a>
                   </Link>
                 </div>

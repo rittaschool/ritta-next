@@ -15,4 +15,12 @@
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
 }
-  
+
+@media screen and (min-width: 991px) {
+    .desktop-bg-light {
+        background-color: #f8f9fa;
+    }
+    .hide-on-desktop {
+        display: none !important;
+    }
+}

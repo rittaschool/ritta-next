@@ -3,9 +3,11 @@ import React from 'react';
 import Image from 'next/image';
 
 import Logo from '../../assets/logo_color.png';
+import Link from 'next/link';
 
 // Icons
 import { MdSchool } from 'react-icons/md';
+import { IoLogInOutline } from 'react-icons/io5';
 
 // Bootstrap
 import { Accordion } from "react-bootstrap";
@@ -26,11 +28,14 @@ class LoginLayoutHoc extends React.Component {
                     <div className="col-md-9 col-lg-8 mx-auto">
                       <Image src={Logo} alt="Ritta Logo" height={96} width={240}/>
                       <h3 className="mb-4"><MdSchool /> Tervetuloa käyttämään Rittaa!</h3>
+                      <Link href="/auth#login">
+                        <a className="btn btn-primary hide-on-desktop my-3"><IoLogInOutline /> Kirjaudu sisään</a>
+                      </Link>
                       <p>Ritta on helppokäyttöinen ja monipuolinen oppilashallintojärjestelmä.</p>
                       <p>Tämä Ritta-yksikön omistaa <b>TestausAkatemia (Testausserveri Ry)</b></p>
                       <h4>Julkiset tiedoitteet</h4>
                       <hr />
-                      <Accordion defaultActiveKey="0" className="mb-3">
+                      <Accordion className="mb-3">
                         <Accordion.Item eventKey="0">
                           <Accordion.Header><b>1.8.2021</b><span className="mx-1"></span>Tervetuloa takaisin kouluun!</Accordion.Header>
                           <Accordion.Body> 
@@ -60,7 +65,7 @@ class LoginLayoutHoc extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-8 col-lg-6 bg-light">
+            <div className="col-md-8 col-lg-6 desktop-bg-light" id="login">
               <div className="login d-flex align-items-center py-5">
                 <div className="container">
                   <div className="row">
