@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Logo from '../../assets/logo_color.png';
+import Logo from '../assets/logo_color.png';
 import { Dropdown } from 'react-bootstrap';
 
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
