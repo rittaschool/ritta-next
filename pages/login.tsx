@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRef } from 'react';
 import { Button, Card, Form } from '../components';
 import useAuthentication from '../hooks/useAuthentication';
