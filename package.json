@@ -8,16 +8,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@rittaschool/shared": "^0.0.17",
+    "@rittaschool/shared": "^0.0.22",
+    "autoprefixer": "^10.4.2",
     "bootstrap": "^5.1.3",
     "next": "^12.0.8",
+    "postcss": "^8.4.5",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.1.1",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-icons": "^4.3.1",
-    "reactstrap": "^9.0.1",
-    "sass": "^1.48.0"
+    "tailwindcss": "^3.0.15"
   },
   "devDependencies": {
     "@types/node": "16.11.11",
