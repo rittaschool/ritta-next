@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/react": "^5.10.1",
     "@rittaschool/shared": "^0.0.27",
     "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.2",

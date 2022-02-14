@@ -97,6 +97,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fullcalendar/common@npm:~5.10.1":
+  version: 5.10.1
+  resolution: "@fullcalendar/common@npm:5.10.1"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: ac5ad04c9ade350ad51a87146ba6c5e679e74c237229ced8057e3a4cc6af9ab93894375c8004beff6f45594bca73ed13763b91604c2b9851b78810dcd991729e
+  languageName: node
+  linkType: hard
+
+"@fullcalendar/daygrid@npm:^5.10.1":
+  version: 5.10.1
+  resolution: "@fullcalendar/daygrid@npm:5.10.1"
+  dependencies:
+    "@fullcalendar/common": ~5.10.1
+    tslib: ^2.1.0
+  checksum: 005e8e829a47eb49bcb6c9cd66a32e0b6b0a371f4554dfe67396818d26c109669cb91bb87c4d17f371aad82d27dadd272a11d19c5291795063a0c2edd912936f
+  languageName: node
+  linkType: hard
+
+"@fullcalendar/react@npm:^5.10.1":
+  version: 5.10.1
+  resolution: "@fullcalendar/react@npm:5.10.1"
+  dependencies:
+    "@fullcalendar/common": ~5.10.1
+    tslib: ^2.1.0
+  peerDependencies:
+    react: ^16.7.0 || ^17
+    react-dom: ^16.7.0 || ^17
+  checksum: 9c5f4b449297107cf6a19556994f77d060b7fb96c3028a5a27a09f7abbe478a7f2aa2a41f094864625dec3eb080f12b37534dffe0962dba51519ff5dc528fb96
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -1686,6 +1718,8 @@ __metadata:
   resolution: "frontend@workspace:."
   dependencies:
     "@apollo/client": ^3.5.7
+    "@fullcalendar/daygrid": ^5.10.1
+    "@fullcalendar/react": ^5.10.1
     "@rittaschool/shared": ^0.0.27
     "@tailwindcss/forms": ^0.4.0
     "@types/node": 16.11.11
