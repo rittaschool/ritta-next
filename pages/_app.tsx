@@ -6,10 +6,12 @@ import '../styles/styles.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <Header />
-      <Component {...pageProps} />
-    </>
+      <div className="flex-grow">
+        <Component {...pageProps} />
+      </div>
+    </div>
   );
 }
 

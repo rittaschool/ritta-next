@@ -1,5 +1,6 @@
 import React from 'react';
-import GridLayout, { Layout } from 'react-grid-layout';
+import { Layout } from 'react-grid-layout';
+import Grid from '../components/Grid';
 
 const Home = () => {
   const [layout, setLayout] = React.useState<Layout[]>([
@@ -9,7 +10,7 @@ const Home = () => {
   ]);
 
   return (
-    <GridLayout
+    <Grid
       className="layout"
       layout={layout}
       onLayoutChange={(layout) => setLayout(layout)}
@@ -26,7 +27,7 @@ const Home = () => {
       <div key="c" className="bg-cyan-500">
         c
       </div>
-    </GridLayout>
+    </Grid>
   );
 };
 
