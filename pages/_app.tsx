@@ -1,14 +1,27 @@
 import type { AppProps } from 'next/app';
+import { MantineProvider } from '@mantine/core';
+
+// CSS
 import 'react-grid-layout/css/styles.css'; // Needed for react-grid-layout to work
 import 'react-resizable/css/styles.css'; // Needed for react-grid-layout to work
+
+// Custom Components
 import Header from '../components/Header';
-import '../styles/styles.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Header />
-      <Component {...pageProps} />
+      {/* <Header /> */}
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: 'light',
+        }}
+      >
+        <Component {...pageProps} />
+      </MantineProvider>
     </>
   );
 }
