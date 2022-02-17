@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { MantineProvider } from '@mantine/core';
+import { AppShell, MantineProvider } from '@mantine/core';
 
 // CSS
 import 'react-grid-layout/css/styles.css'; // Needed for react-grid-layout to work
@@ -10,19 +10,18 @@ import Header from '../components/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      {/* <Header /> */}
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        /** Put your mantine theme override here */
+        colorScheme: 'dark',
+      }}
+    >
+      <AppShell navbarOffsetBreakpoint="sm" header={<Header />}>
         <Component {...pageProps} />
-      </MantineProvider>
-    </>
+      </AppShell>
+    </MantineProvider>
   );
 }
 

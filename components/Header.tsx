@@ -1,14 +1,41 @@
-import React from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import logoImage from '../assets/Ritta_White.svg';
+import {
+  Anchor,
+  Burger,
+  createStyles,
+  Header as MantineHeader,
+  MediaQuery,
+} from '@mantine/core';
+import Logo from './Logo';
+
+import Ritta from '../assets/Ritta.svg';
+
+const useStyles = createStyles((theme) => ({
+  header: {
+    alignItems: 'center',
+    display: 'flex',
+  },
+}));
 
 const Header = () => {
+  const { classes } = useStyles();
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="w-full flex fixed top-0 left-0 h-20 bg-primary items-center">
-      <div className="relative h-full w-36 m-4">
-        <Image layout="fill" src={logoImage} alt="Ritta Logo" />
+    <MantineHeader height={75}>
+      <div className={classes.header}>
+        <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+          <Burger
+            opened={open}
+            onClick={() => setOpen(!open)}
+            size="sm"
+            mr="xl"
+          ></Burger>
+        </MediaQuery>
+        <Logo />
       </div>
-    </header>
+    </MantineHeader>
   );
 };
 
