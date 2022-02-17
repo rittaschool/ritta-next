@@ -6,6 +6,7 @@ import rittaSvg from '../assets/Ritta.svg';
 interface LogoProps {
   color?: string;
   SVG?: any;
+  onClick?: () => void;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -20,10 +21,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 // #1abc9c is ritta primary color (green)
-const Logo: FC<LogoProps> = ({ color = '#1abc9c', SVG = rittaSvg }) => {
+const Logo: FC<LogoProps> = ({
+  color = '#1abc9c',
+  SVG = rittaSvg,
+  onClick,
+}) => {
   const { classes } = useStyles();
   return (
-    <div className={classes.logo}>
+    <div className={classes.logo} onClick={onClick}>
       <SVG fill={color} className={classes.svg} />
     </div>
   );

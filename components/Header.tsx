@@ -33,7 +33,11 @@ const Header = () => {
             mr="xl"
           ></Burger>
         </MediaQuery>
-        <Logo />
+        <Logo
+          onClick={() =>
+            alert("TODO:// redirect to / or /home, sent from 'Header.tsx:36'")
+          }
+        />
       </div>
     </MantineHeader>
   );
