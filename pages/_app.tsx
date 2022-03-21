@@ -1,27 +1,35 @@
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from '@mantine/core';
 import type { AppProps } from 'next/app';
-import { AppShell, MantineProvider } from '@mantine/core';
+import { useState } from 'react';
 
 // CSS
 import 'react-grid-layout/css/styles.css'; // Needed for react-grid-layout to work
 import 'react-resizable/css/styles.css'; // Needed for react-grid-layout to work
 
-// Custom Components
-import Header from '../components/Header';
-
 function MyApp({ Component, pageProps }: AppProps) {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        /** Put your mantine theme override here */
-        colorScheme: 'dark',
-      }}
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
     >
-      <AppShell navbarOffsetBreakpoint="sm" header={<Header />}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme,
+        }}
+      >
         <Component {...pageProps} />
-      </AppShell>
-    </MantineProvider>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 }
 
