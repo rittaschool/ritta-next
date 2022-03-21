@@ -45,13 +45,11 @@ export default function Layout({ children }: { children: ReactNode }) {
         >
           {/* First section with normal height (depends on section content) */}
           {/* <Navbar.Section>First section</Navbar.Section> */}
-
           <Navbar.Section grow>
             {links.map((link) => (
               <LayoutLink {...link} key={link.label} />
             ))}
           </Navbar.Section>
-
           <Navbar.Section>
             Build `insert commit id and branch here`
           </Navbar.Section>
