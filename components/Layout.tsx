@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { ReactNode, useState } from 'react';
 import { Calendar, File, Home } from 'react-feather';
 import { Messages } from 'tabler-icons-react';
+import useBuildId from '../hooks/useBuildId';
 import LayoutLink from './LayoutLink';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
@@ -35,6 +36,7 @@ const links = [
 export default function Layout({ children }: { children: ReactNode }) {
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
+  const buildId = useBuildId();
 
   return (
     <AppShell
@@ -61,9 +63,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <LayoutLink key={ele.label} {...ele} />
             ))}
           </Navbar.Section>
-          <Navbar.Section>
-            Build `insert commit id and branch here`
-          </Navbar.Section>
+          <Navbar.Section>Build {buildId}</Navbar.Section>
         </Navbar>
       }
       header={
