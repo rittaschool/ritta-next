@@ -6,6 +6,7 @@ import {
   Navbar,
   useMantineTheme,
 } from '@mantine/core';
+import Link from 'next/link';
 import { ReactNode, useState } from 'react';
 import { Calendar, File, Home } from 'react-feather';
 import { Messages } from 'tabler-icons-react';
@@ -15,10 +16,20 @@ import ThemeToggle from './ThemeToggle';
 
 // Links
 const links = [
-  { icon: <Home size={16} />, color: 'teal', label: 'Koti' },
-  { icon: <Messages size={16} />, color: 'orange', label: 'Viestit' },
-  { icon: <Calendar size={16} />, color: 'red', label: 'Työjärjestys' },
-  { icon: <File size={16} />, color: 'grape', label: 'Kokeet' },
+  { icon: <Home size={16} />, color: 'teal', label: 'Koti', to: '/home' },
+  {
+    icon: <Messages size={16} />,
+    color: 'orange',
+    label: 'Viestit',
+    to: '/messages',
+  },
+  {
+    icon: <Calendar size={16} />,
+    color: 'red',
+    label: 'Työjärjestys',
+    to: '/schedule',
+  },
+  { icon: <File size={16} />, color: 'grape', label: 'Kokeet', to: '/tests' },
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -46,8 +57,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           {/* First section with normal height (depends on section content) */}
           {/* <Navbar.Section>First section</Navbar.Section> */}
           <Navbar.Section grow>
-            {links.map((link) => (
-              <LayoutLink {...link} key={link.label} />
+            {links.map((ele) => (
+              <LayoutLink key={ele.label} {...ele} />
             ))}
           </Navbar.Section>
           <Navbar.Section>

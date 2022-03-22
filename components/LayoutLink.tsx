@@ -1,13 +1,15 @@
 import { Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
-type Props = {
+interface Props {
   icon: ReactNode;
   color: string;
   label: string;
-};
+  to: string;
+}
 
-function LayoutLink({ color, label, icon }: Props) {
+function LayoutLink({ color, label, icon, to }: Props) {
   return (
     <UnstyledButton
       sx={(theme) => ({
@@ -26,13 +28,19 @@ function LayoutLink({ color, label, icon }: Props) {
         },
       })}
     >
-      <Group>
-        <ThemeIcon color={color} variant="light">
-          {icon}
-        </ThemeIcon>
+      <Link href={to} passHref>
+        <Group>
+          <ThemeIcon color={color} variant="light">
+            {icon}
+          </ThemeIcon>
 
-        <Text size="sm">{label}</Text>
-      </Group>
+          {to}
+
+          <Text size="sm" component="a">
+            {label}
+          </Text>
+        </Group>
+      </Link>
     </UnstyledButton>
   );
 }
