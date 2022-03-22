@@ -34,8 +34,6 @@ function LayoutLink({ color, label, icon, to }: Props) {
             {icon}
           </ThemeIcon>
 
-          {to}
-
           <Text size="sm" component="a">
             {label}
           </Text>
