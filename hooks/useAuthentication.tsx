@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { startLogin, submitChallenge } from '../data/authentication';
 import { Challenge, IUser } from '@rittaschool/shared';
+import { startFido2Setup, respondToFido2Setup } from '../data/fido2';
 
 interface UseAuthentication {
   authenticated: boolean;
@@ -11,6 +12,10 @@ interface UseAuthentication {
     identifier?: string | null
   ) => Promise<{ nextScreen: string }>;
   submitPassword: (password: string, challenge: Challenge) => any; //TODO: make interface later
+  fido2: {
+    startSetup: (email: string) => Promise<any>;
+    finishSetup: (data: any) => Promise<boolean>;
+  };
 }
 
 const screens: {
@@ -63,6 +68,8 @@ const useAuthentication = (): UseAuthentication => {
       },
     });
 
+    console.log('data', data);
+
     setLoading(loading);
 
     if (errors || !data) {
@@ -75,6 +82,36 @@ const useAuthentication = (): UseAuthentication => {
     }
   };
 
+  const fido2 = {
+    // Email should be removed because this is going to be behind login
+    startSetup: async (email: string) => {
+      const { errors, data } = await startFido2Setup(email);
+
+      if (errors || !data) {
+        console.log(errors);
+      }
+
+      const result = await navigator.credentials
+        .create({ publicKey: data })
+        .catch((err) => console.log('FAIL err: ', err));
+
+      return result;
+    },
+    finishSetup: async (data: any) => {
+      console.log('data', data);
+      const { errors, data: resultData } = await respondToFido2Setup(data);
+
+      if (errors || !resultData) {
+        console.log(errors);
+        return false;
+      }
+
+      console.log(resultData);
+
+      return true;
+    },
+  };
+
   return {
     authenticated,
     loading,
@@ -82,6 +119,7 @@ const useAuthentication = (): UseAuthentication => {
     startLoginProcess,
     submitPassword,
     challenge,
+    fido2,
   };
 };
 

@@ -1,12 +1,11 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
+import Layout from '../components/Layout';
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Link href="/login">/login</Link>
-      <Link href="/home">/homie</Link>
-    </>
+    <Layout>
+      <h1>Hello Next.js 👋</h1>
+    </Layout>
   );
 };
 
