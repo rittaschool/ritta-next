@@ -11,12 +11,14 @@ interface LogoProps {
 
 const useStyles = createStyles((theme) => ({
   logo: {
+    alignItems: 'center',
+    display: 'flex',
     height: '5rem',
     width: '100%',
   },
 
   svg: {
-    height: '100%',
+    height: '60%',
   },
 }));
 
