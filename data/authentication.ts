@@ -76,7 +76,7 @@ export const submitChallenge = async (
     challenge?: Challenge;
     user?: IUser;
   };
-  errors?: readonly GraphQLError[];
+  errors?: readonly unknown[];
   loading: boolean;
 }> => {
   const challengeInput: Challenge = {
@@ -125,5 +125,10 @@ export const submitChallenge = async (
     };
   } catch (error) {
     console.log('auth', error);
+
+    return {
+      errors: [error],
+      loading: false,
+    };
   }
 };
