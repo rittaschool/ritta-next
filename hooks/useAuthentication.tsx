@@ -8,9 +8,14 @@ interface UseAuthentication {
   loading: boolean;
   user: IUser | null;
   challenge: Challenge | null;
-  startLoginProcess: (
-    identifier?: string | null
-  ) => Promise<{ nextScreen: string }>;
+  startLoginProcess: (identifier?: string | null) => Promise<{
+    nextScreen: string;
+    errors?: readonly unknown[];
+    user: {
+      photoUri: string;
+      firstName: string;
+    } | null;
+  }>;
   submitPassword: (password: string, challenge: Challenge) => any; //TODO: make interface later
   fido2: {
     startSetup: (email: string) => Promise<any>;
@@ -21,8 +26,9 @@ interface UseAuthentication {
 const screens: {
   [key: string]: string;
 } = {
+  EMAIL_NEEDED: 'email',
   PASSWORD_NEEDED: 'password',
-  FIDO2_NEEDED: 'fido2',
+  FIDO2_NEEDED: 'fido',
   OTP_NEEDED: 'otp',
 };
 
@@ -34,7 +40,14 @@ const useAuthentication = (): UseAuthentication => {
 
   const startLoginProcess = async (
     identifier?: string | null
-  ): Promise<{ nextScreen: string }> => {
+  ): Promise<{
+    nextScreen: string;
+    errors?: readonly unknown[];
+    user: {
+      photoUri: string;
+      firstName: string;
+    } | null;
+  }> => {
     if (!identifier) console.log('No identifier');
 
     const { loading, errors, data } = await startLogin(identifier!);
@@ -42,16 +55,24 @@ const useAuthentication = (): UseAuthentication => {
     setLoading(loading);
 
     if (errors || !data) {
-      console.log(errors);
-      console.log('No Data');
+      return {
+        nextScreen: screens['EMAIL_NEEDED'],
+        errors: errors,
+        user: null,
+      };
     }
 
-    if (data!.challenge) {
-      setChallenge(data!.challenge);
-      return { nextScreen: screens[data!.challenge!.type] };
-    } else {
-      throw new Error('No challenge');
-    }
+    if (!data!.challenge) throw new Error('No challenge');
+
+    setChallenge(data!.challenge);
+
+    if (!data!.user)
+      return {
+        nextScreen: screens[data!.challenge!.type],
+        user: null,
+      };
+
+    return { nextScreen: screens[data!.challenge!.type], user: data!.user };
   };
 
   const submitPassword = async (password: string, challenge: Challenge) => {

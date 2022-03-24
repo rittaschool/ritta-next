@@ -3,41 +3,70 @@ import { Challenge, IUser } from '@rittaschool/shared';
 import { GraphQLError } from 'graphql';
 import { graphqlClient as client } from './baseClient';
 
+export const startLoginQuery = gql`
+  query startLogin($identifier: String!) {
+    startLoginProcess(email: $identifier) {
+      challenge {
+        type
+        id
+        userId
+      }
+      userFirstName
+      userPhotoUri
+    }
+  }
+`;
+
 export const startLogin = async (
   identifier: string
 ): Promise<{
   data?: {
     challenge: Challenge;
+    user: {
+      firstName: string;
+      photoUri: string;
+    };
   };
-  errors?: readonly GraphQLError[];
+  errors?: readonly unknown[];
   loading: boolean;
 }> => {
-  const res = await client.query({
-    query: gql`
-      query startLogin($identifier: String!) {
-        startLoginProcess(email: $identifier) {
-          challenge {
-            type
-            id
-            userId
+  try {
+    const res = await client.query({
+      query: gql`
+        query startLogin($identifier: String!) {
+          startLoginProcess(email: $identifier) {
+            challenge {
+              type
+              id
+              userId
+            }
+            userFirstName
+            userPhotoUri
           }
-          userFirstName
-          userPhotoUri
         }
-      }
-    `,
-    variables: {
-      identifier,
-    },
-  });
+      `,
+      variables: {
+        identifier,
+      },
+    });
 
-  return {
-    loading: res.loading,
-    errors: res.errors,
-    data: {
-      challenge: res.data.startLoginProcess.challenge,
-    },
-  };
+    return {
+      loading: res.loading,
+      errors: res.errors,
+      data: {
+        challenge: res.data.startLoginProcess.challenge,
+        user: {
+          firstName: res.data.startLoginProcess.userFirstName,
+          photoUri: res.data.startLoginProcess.userPhotoUri,
+        },
+      },
+    };
+  } catch (error) {
+    return {
+      errors: [error],
+      loading: false,
+    };
+  }
 };
 
 export const submitChallenge = async (
@@ -65,32 +94,36 @@ export const submitChallenge = async (
     challengeInput.data!.otpData = challenge.data.otpData;
   }
 
-  const res = await client.query({
-    query: gql`
-      query SubmitChallenge($challenge: ChallengeInput!) {
-        submitChallenge(challenge: $challenge) {
-          user {
-            id
-            firstName
-            username
-          }
-          challenge {
-            type
+  try {
+    const res = await client.query({
+      query: gql`
+        query SubmitChallenge($challenge: ChallengeInput!) {
+          submitChallenge(challenge: $challenge) {
+            user {
+              id
+              firstName
+              username
+            }
+            challenge {
+              type
+            }
           }
         }
-      }
-    `,
-    variables: {
-      challenge: challengeInput,
-    },
-  });
+      `,
+      variables: {
+        challenge: challengeInput,
+      },
+    });
 
-  return {
-    loading: res.loading,
-    errors: res.errors,
-    data: {
-      challenge: res.data.submitChallenge.challenge,
-      user: res.data.submitChallenge.user,
-    },
-  };
+    return {
+      loading: res.loading,
+      errors: res.errors,
+      data: {
+        challenge: res.data.submitChallenge.challenge,
+        user: res.data.submitChallenge.user,
+      },
+    };
+  } catch (error) {
+    console.log('auth', error);
+  }
 };
